@@ -85,7 +85,7 @@
                     <td class="text-xs-left">{{ props.item.number !== null ? props.item.number : 'none' }}</td>
                     <td class="text-xs-left">
                         <span v-if="!props.item.url">none</span>
-                        <a v-if="props.item.url" :href="props.item.url">link</a>
+                        <a v-if="props.item.url" target="_blank" :href="props.item.url">{{props.item.remote_id}}</a>
                     </td>
                     <td class="justify-center">
                         <v-btn flat icon slot="activator">
