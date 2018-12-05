@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   api: {
-    baseUrl: 'http://localhost:3000'
+    baseUrl: process.env.VUE_APP_API_URL
   },
   dev: {
 
