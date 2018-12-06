@@ -1,11 +1,10 @@
 'use strict'
 const axios = require('axios')
-const config = require('../../config')
 
 class Api {
   constructor (basePath) {
     this.client = axios.create({
-      baseURL: config.api.baseUrl
+      baseURL: process.env.VUE_APP_API_URL
     })
   }
 
