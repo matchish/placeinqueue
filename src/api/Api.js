@@ -31,10 +31,6 @@ class Api {
   updatePlace (place) {
     return this.client.post(`place/${place.id}`, place)
   }
-
-  heartbeat (place) {
-    return this.client.post(`place/${place.id}/heartbeat`, {datetime: new Date()})
-  }
 }
 
 export default Api
