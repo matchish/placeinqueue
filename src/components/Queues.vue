@@ -1,24 +1,29 @@
 <style>
-    .cell {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        box-sizing: border-box;
-        display: block;
-        padding: 8px;
-        width: 100%;
+    .cell-truncate > div {
+        position: relative;
+        overflow: hidden;
+        height: 1em;
     }
 
-    .cell-overflow {
-        box-sizing: border-box;
+    /* visible content */
+    .cell-truncate > div > span {
+        display: block;
+        position: absolute;
+        max-width: 100%;
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        line-height: 1em;
+    }
+
+    /* spacer content */
+    .cell-truncate > div:after {
+        content: attr(title);
+        overflow: hidden;
+        height: 0;
+        display: block;
     }
 </style>
-
 <template>
     <v-container fluid>
         <v-layout row wrap>
@@ -103,11 +108,9 @@
                         </td>
                         <td class="text-xs-left">{{ props.item.datetime | moment('LLL') }}</td>
                         <td class="text-xs-left">{{ props.item.prestart }}</td>
-                        <td class="text-xs-left">
-                            <div class="cell">
-                                <div class="cell-overflow">
-                                    {{ props.item.url }}
-                                </div>
+                        <td class="text-xs-left cell-truncate">
+                            <div :title="props.item.url">
+                                <span>{{ props.item.url }}</span>
                             </div>
                         </td>
                         <td class="text-xs-left">{{ props.item.places }}</td>
