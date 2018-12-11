@@ -18,11 +18,13 @@ Vue.use(Vuetify, { theme: {
   success: '#4CAF50',
   warning: '#FFC107'
 }})
-
 Vue.config.productionTip = false
 
 Vue.filter('moment', function (value, format) {
   return moment(value).utc().format(format)
+})
+Vue.filter('truncate', function (text, stop, clamp) {
+  return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
 })
 
 /* eslint-disable no-new */
