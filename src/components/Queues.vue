@@ -144,8 +144,8 @@
             sortable: false,
             value: 'title'
           },
-                {text: 'Start', value: 'datetime', sortable: false},
-                {text: 'Prestart', value: 'prestart', sortable: false},
+                {text: 'Start(UTC)', value: 'datetime', sortable: false},
+                {text: 'Prestart(min)', value: 'prestart', sortable: false},
                 {text: 'Url', value: 'url', sortable: false},
                 {text: 'Places', value: 'places', sortable: false},
                 {text: 'Actions', value: 'name', sortable: false}
