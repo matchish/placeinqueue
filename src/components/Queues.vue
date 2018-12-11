@@ -224,6 +224,7 @@
           if (copy.datetime) {
             copy.datetime = moment.utc(copy.datetime)
           }
+          copy.places = parseInt(copy.places)
           try {
             if (copy.id) {
               await api.updateQueue(copy)
