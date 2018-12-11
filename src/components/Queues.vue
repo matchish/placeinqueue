@@ -1,14 +1,3 @@
-<style>
-    .truncate {
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -o-text-overflow: ellipsis;
-        max-width: 20%;
-    }
-</style>
-
 <template>
     <v-container fluid>
         <v-layout row wrap>
@@ -93,7 +82,7 @@
                         </td>
                         <td class="text-xs-left">{{ props.item.datetime | moment('LLL') }}</td>
                         <td class="text-xs-left">{{ props.item.prestart }}</td>
-                        <td class="text-xs-left truncate">{{ props.item.url }}</td>
+                        <td class="text-xs-left text-truncate">{{ props.item.url }}</td>
                         <td class="text-xs-left">{{ props.item.places }}</td>
                         <td class="justify-center layout px-0">
                             <v-icon
