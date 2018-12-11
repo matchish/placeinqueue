@@ -1,3 +1,24 @@
+<style>
+    .cell {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        display: block;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .cell-overflow {
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
 <template>
     <v-container fluid>
         <v-layout row wrap>
@@ -82,7 +103,13 @@
                         </td>
                         <td class="text-xs-left">{{ props.item.datetime | moment('LLL') }}</td>
                         <td class="text-xs-left">{{ props.item.prestart }}</td>
-                        <td class="text-xs-left text-truncate">{{ props.item.url }}</td>
+                        <td class="text-xs-left">
+                            <div class="cell">
+                                <div class="cell-overflow">
+                                    {{ props.item.url }}
+                                </div>
+                            </div>
+                        </td>
                         <td class="text-xs-left">{{ props.item.places }}</td>
                         <td class="justify-center layout px-0">
                             <v-icon
