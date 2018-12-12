@@ -6,4 +6,4 @@ RUN mkdir dist
 COPY . .
 RUN chown -R node:node /var/www
 USER node
-CMD ['npm', 'start']
+CMD ["npm", "run", "dev"]
