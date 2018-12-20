@@ -42,7 +42,7 @@
                                             <v-text-field v-model="editedItem.title" label="Title"></v-text-field>
                                         </v-flex>
                                         <v-flex xs5 sm6 md4>
-                                            <v-text-field type="datetime-local" v-model="editedItem.datetime"
+                                            <v-text-field type="datetime-local" v-model="editedItem.start_at"
                                                           label="Start"></v-text-field>
                                         </v-flex>
                                         <v-flex xs5 sm6 md4>
@@ -53,7 +53,7 @@
                                             <v-text-field v-model="editedItem.url" label="Url"></v-text-field>
                                         </v-flex>
                                         <v-flex xs5 sm6 md4>
-                                            <v-text-field v-model="editedItem.places" type="number"
+                                            <v-text-field v-model="editedItem.number_of_places" type="number"
                                                           label="Places"></v-text-field>
                                         </v-flex>
                                     </v-layout>
@@ -80,14 +80,14 @@
                                 props.item.title }}
                             </router-link>
                         </td>
-                        <td class="text-xs-left">{{ props.item.datetime | moment('LLL') }}</td>
+                        <td class="text-xs-left">{{ props.item.start_at | moment('LLL') }}</td>
                         <td class="text-xs-left">{{ props.item.prestart }}</td>
                         <td class="text-xs-left text-truncate">
                             <div :title="props.item.url">
                                 {{ props.item.url | truncate(100) }}
                             </div>
                         </td>
-                        <td class="text-xs-left">{{ props.item.places }}</td>
+                        <td class="text-xs-left">{{ props.item.number_of_places }}</td>
                         <td class="justify-center layout px-0">
                             <v-icon
                                     small
@@ -137,10 +137,10 @@
             sortable: false,
             value: 'title'
           },
-                {text: 'Start(UTC)', value: 'datetime', sortable: false},
+                {text: 'Start(UTC)', value: 'start_at', sortable: false},
                 {text: 'Prestart(min)', value: 'prestart', sortable: false},
                 {text: 'Url', value: 'url', sortable: false},
-                {text: 'Places', value: 'places', sortable: false},
+                {text: 'Places', value: 'number_of_places', sortable: false},
                 {text: 'Actions', value: 'name', sortable: false}
         ],
         queues: [],
@@ -192,7 +192,7 @@
         editItem (item) {
           this.editedIndex = this.queues.indexOf(item)
           this.editedItem = Object.assign({}, item)
-          this.editedItem.datetime = moment(this.editedItem.datetime).utc().format('YYYY-MM-DDTHH:mm')
+          this.editedItem.start_at = moment(this.editedItem.start_at).utc().format('YYYY-MM-DDTHH:mm')
           this.dialog = true
         },
 
@@ -214,10 +214,10 @@
 
         async save () {
           let copy = Object.assign({}, this.editedItem)
-          if (copy.datetime) {
-            copy.datetime = moment.utc(copy.datetime)
+          if (copy.start_at) {
+            copy.start_at = moment.utc(copy.start_at)
           }
-          copy.places = parseInt(copy.places)
+          copy.number_of_places = parseInt(copy.number_of_places)
           try {
             if (copy.id) {
               await api.updateQueue(copy)
