@@ -218,6 +218,7 @@
             copy.start_at = moment.utc(copy.start_at)
           }
           copy.number_of_places = parseInt(copy.number_of_places)
+          copy.prestart = parseInt(copy.prestart)
           try {
             if (copy.id) {
               await api.updateQueue(copy)
