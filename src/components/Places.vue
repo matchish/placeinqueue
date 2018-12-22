@@ -142,6 +142,10 @@
         this.initialize()
       },
 
+      beforeDestroy() {
+          clearInterval(this.updateListInterval)
+      },
+
       methods: {
         initialize () {
           const updateList = async () => {
@@ -156,7 +160,7 @@
             }
           }
           updateList()
-          setInterval(updateList, 5000)
+          this.updateListInterval = setInterval(updateList, 5000)
         },
         showError: function (e) {
           this.snackbar = {
