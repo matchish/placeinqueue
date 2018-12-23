@@ -29,78 +29,82 @@
 </style>
 
 <template>
-    <v-flex xs12 transition="slide-x-transition">
-        <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
-        <v-snackbar
-                v-model="snackbar.value"
-                :color="snackbar.color"
-                :multi-line="'multi-line'"
-                :timeout="4000"
-                :top="true"
-                :right="true"
-        >
-            {{ snackbar.text }}
-            <v-btn
-                    dark
-                    flat
-                    @click="snackbar = false"
-            >
-                Close
-            </v-btn>
-        </v-snackbar>
-        <v-toolbar flat color="white">
-            <v-toolbar-title>Places</v-toolbar-title>
-            <v-divider
-                    class="mx-2"
-                    inset
-                    vertical
-            ></v-divider>
-        </v-toolbar>
-        <v-data-table
-                :headers="headers"
-                :items="places"
-                :loading="true"
-                class="elevation-1"
-        >
-            <v-progress-linear v-if="loading" height="2" slot="progress" indeterminate></v-progress-linear>
-            <v-progress-linear v-if="!loading" height="2" slot="progress" value="0"></v-progress-linear>
-            <template slot="items" slot-scope="props">
-                <tr @click="toggleUsed(props.item)">
-                    <td class="justify-center">
-                        <v-icon
-                                v-bind:color="props.item.used ? 'success' : ''"
-                                small
-                        >
-                            check_circle
-                        </v-icon>
-                    </td>
-                    <td class="justify-center">
-                        <v-icon
-                                v-bind:color="online(props.item) ? 'success' : ''"
-                                small
-                        >
-                            offline_bolt
-                        </v-icon>
-                    </td>
-                    <td class="text-xs-left">{{ props.item.number !== null ? props.item.number : 'none' }}</td>
-                    <td class="text-xs-left">
-                        <span v-if="!props.item.url">none</span>
-                        <a v-if="props.item.url" target="_blank" :href="props.item.url">{{props.item.remote_id}}</a>
-                    </td>
-                    <td class="justify-center">
-                        <v-btn flat icon slot="activator">
-                            <v-icon
-                                    small
-                                    @click="copyUrl(props.item)"
-                            >
-                                content_copy
-                            </v-icon>
-                        </v-btn>
-                    </td>
-                </tr>
-            </template>
-        </v-data-table>
-    </v-flex>
+    <v-container fluid>
+        <v-layout row wrap>
+            <v-flex xs12 transition="slide-x-transition">
+                <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+                <v-snackbar
+                        v-model="snackbar.value"
+                        :color="snackbar.color"
+                        :multi-line="'multi-line'"
+                        :timeout="4000"
+                        :top="true"
+                        :right="true"
+                >
+                    {{ snackbar.text }}
+                    <v-btn
+                            dark
+                            flat
+                            @click="snackbar = false"
+                    >
+                        Close
+                    </v-btn>
+                </v-snackbar>
+                <v-toolbar flat color="white">
+                    <v-toolbar-title>Places</v-toolbar-title>
+                    <v-divider
+                            class="mx-2"
+                            inset
+                            vertical
+                    ></v-divider>
+                </v-toolbar>
+                <v-data-table
+                        :headers="headers"
+                        :items="places"
+                        :loading="true"
+                        class="elevation-1"
+                >
+                    <v-progress-linear v-if="loading" height="2" slot="progress" indeterminate></v-progress-linear>
+                    <v-progress-linear v-if="!loading" height="2" slot="progress" value="0"></v-progress-linear>
+                    <template slot="items" slot-scope="props">
+                        <tr @click="toggleUsed(props.item)">
+                            <td class="justify-center">
+                                <v-icon
+                                        v-bind:color="props.item.used ? 'success' : ''"
+                                        small
+                                >
+                                    check_circle
+                                </v-icon>
+                            </td>
+                            <td class="justify-center">
+                                <v-icon
+                                        v-bind:color="online(props.item) ? 'success' : ''"
+                                        small
+                                >
+                                    offline_bolt
+                                </v-icon>
+                            </td>
+                            <td class="text-xs-left">{{ props.item.number !== null ? props.item.number : 'none' }}</td>
+                            <td class="text-xs-left">
+                                <span v-if="!props.item.url">none</span>
+                                <a v-if="props.item.url" target="_blank" :href="props.item.url">{{props.item.remote_id}}</a>
+                            </td>
+                            <td class="justify-center">
+                                <v-btn flat icon slot="activator">
+                                    <v-icon
+                                            small
+                                            @click="copyUrl(props.item)"
+                                    >
+                                        content_copy
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                        </tr>
+                    </template>
+                </v-data-table>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
