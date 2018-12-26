@@ -84,7 +84,7 @@
                                     offline_bolt
                                 </v-icon>
                             </td>
-                            <td class="text-xs-left">{{ props.item.number !== null ? props.item.number : 'none' }}</td>
+                            <td class="text-xs-left">{{ props.item.number_in_queue !== null ? props.item.number_in_queue : 'none' }}</td>
                             <td class="text-xs-left">
                                 <span v-if="!props.item.url">none</span>
                                 <a v-if="props.item.url" target="_blank" :href="props.item.url">{{props.item.remote_id}}</a>
@@ -133,7 +133,7 @@
             text: 'Number in queue',
             align: 'left',
             sortable: false,
-            value: 'number'
+            value: 'number_in_queue'
           },
                 {text: 'Url', value: 'url', sortable: false},
                 {text: 'Actions', value: 'used', sortable: false}
