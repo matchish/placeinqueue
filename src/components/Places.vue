@@ -146,8 +146,8 @@
         this.initialize()
       },
 
-      beforeDestroy() {
-          clearInterval(this.updateListInterval)
+      beforeDestroy () {
+        clearInterval(this.updateListInterval)
       },
 
       methods: {
