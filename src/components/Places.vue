@@ -67,7 +67,7 @@
                     <v-progress-linear v-if="loading" height="2" slot="progress" indeterminate></v-progress-linear>
                     <v-progress-linear v-if="!loading" height="2" slot="progress" value="0"></v-progress-linear>
                     <template slot="items" slot-scope="props">
-                        <tr @click="toggleUsed(props.item)">
+                        <tr>
                             <td class="justify-center">
                                 <v-icon
                                         v-bind:color="props.item.used ? 'success' : ''"
@@ -83,6 +83,7 @@
                                 >
                                     offline_bolt
                                 </v-icon>
+                                {{ props.item.status }}
                             </td>
                             <td class="text-xs-left">{{ props.item.number_in_queue !== null ? props.item.number_in_queue : 'none' }}</td>
                             <td class="text-xs-left">
