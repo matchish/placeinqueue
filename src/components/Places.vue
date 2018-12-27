@@ -1,7 +1,4 @@
 <style scoped>
-    tr {
-        cursor: pointer;
-    }
     tr td:last-child{
         width:1% !important;
         white-space:nowrap;
@@ -94,7 +91,7 @@
                                 <v-btn flat icon slot="activator">
                                     <v-icon
                                             small
-                                            @click="copyUrl(props.item)"
+                                            @click="onClickCopy(item)"
                                     >
                                         content_copy
                                     </v-icon>
@@ -189,6 +186,10 @@
         },
         copyUrl: function (item) {
           this.$copyText(item.url)
+        },
+        onClickCopy: function (item) {
+            copyUrl(props.item)
+            toggleUsed(props.item)
         },
         online: function (item) {
           if (!item.heartbeat_at) {
