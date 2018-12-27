@@ -91,7 +91,7 @@
                                 <v-btn flat icon slot="activator">
                                     <v-icon
                                             small
-                                            @click="onClickCopy(item)"
+                                            @click="onClickCopy(props.item)"
                                     >
                                         content_copy
                                     </v-icon>
@@ -188,8 +188,8 @@
           this.$copyText(item.url)
         },
         onClickCopy: function (item) {
-            copyUrl(props.item)
-            toggleUsed(props.item)
+          this.copyUrl(item)
+          this.toggleUsed(item)
         },
         online: function (item) {
           if (!item.heartbeat_at) {
