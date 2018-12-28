@@ -16,11 +16,11 @@
         white-space:nowrap;
     }
     tr td:nth-child(2){
-        width:1% !important;
+        width:5% !important;
         white-space:nowrap;
     }
     thead th:nth-child(2){
-        width:1% !important;
+        width:5% !important;
         white-space:nowrap;
     }
 </style>
@@ -80,12 +80,41 @@
                                 >
                                     offline_bolt
                                 </v-icon>
+                                &nbsp;
                                 {{ props.item.status }}
                             </td>
                             <td class="text-xs-left">{{ props.item.number_in_queue !== null ? props.item.number_in_queue : 'none' }}</td>
                             <td class="text-xs-left">
                                 <span v-if="!props.item.url">none</span>
                                 <a v-if="props.item.url" target="_blank" :href="props.item.url">{{props.item.remote_id}}</a>
+                            </td>
+                            <td class="text-xs-left">
+                                <v-icon
+                                        small
+                                        v-if="!props.item.screenshot"
+                                >
+                                    not_interested
+                                </v-icon>
+                                <v-dialog>
+                                    <v-btn v-if="props.item.screenshot" flat icon slot="activator">
+                                        <v-icon
+                                                small
+                                        >
+                                            image
+                                        </v-icon>
+                                    </v-btn>
+
+                                    <v-carousel
+                                            height="100%"
+                                    >
+                                        <v-carousel-item
+                                                v-for="(item,i) in [props.item.screenshot]"
+                                                :key="i"
+                                                :src="props.item.screenshot"
+                                        ></v-carousel-item>
+                                    </v-carousel>
+
+                                </v-dialog>
                             </td>
                             <td class="justify-center">
                                 <v-btn flat icon slot="activator">
@@ -94,6 +123,22 @@
                                             @click="onClickCopy(props.item)"
                                     >
                                         content_copy
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn flat icon slot="activator">
+                                    <v-icon
+                                            small
+                                            @click="setAction(props.item, 'screenshot')"
+                                    >
+                                        camera_alt
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn flat icon slot="activator">
+                                    <v-icon
+                                            small
+                                            @click="setAction(props.item, 'restart')"
+                                    >
+                                        loop
                                     </v-icon>
                                 </v-btn>
                             </td>
@@ -134,6 +179,7 @@
             value: 'number_in_queue'
           },
                 {text: 'Url', value: 'url', sortable: false},
+                {text: 'Image', value: 'screenshot', sortable: false},
                 {text: 'Actions', value: 'used', sortable: false}
 
         ],
@@ -183,6 +229,14 @@
           } finally {
             this.loading = false
           }
+        },
+        async setAction(item, action) {
+            let copy = {...item, action: action}
+            try {
+                await api.updatePlace(copy)
+            } catch (e) {
+                this.showError(e)
+            }
         },
         copyUrl: function (item) {
           this.$copyText(item.url)
