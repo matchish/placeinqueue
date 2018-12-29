@@ -89,16 +89,19 @@
                                 <a v-if="props.item.url" target="_blank" :href="props.item.url">{{props.item.remote_id}}</a>
                             </td>
                             <td class="text-xs-left">
-                                <v-icon
-                                        small
-                                        v-if="!props.item.screenshot"
-                                >
-                                    not_interested
-                                </v-icon>
+
+                                <v-btn v-if="props.item.screenshot" color="grey" disabled flat icon>
+                                    <v-icon
+                                            middle
+                                    >
+                                        not_interested
+                                    </v-icon>
+                                </v-btn>
+
                                 <v-dialog>
-                                    <v-btn v-if="props.item.screenshot" flat icon slot="activator">
+                                    <v-btn v-if="props.item.screenshot" color="primary" flat icon slot="activator">
                                         <v-icon
-                                                small
+                                                middle
                                         >
                                             image
                                         </v-icon>
