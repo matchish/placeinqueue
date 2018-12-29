@@ -230,13 +230,13 @@
             this.loading = false
           }
         },
-        async setAction(item, action) {
-            let copy = {...item, action: action}
-            try {
-                await api.updatePlace(copy)
-            } catch (e) {
-                this.showError(e)
-            }
+        async setAction (item, action) {
+          let copy = {...item, action: action}
+          try {
+            await api.updatePlace(copy)
+          } catch (e) {
+            this.showError(e)
+          }
         },
         copyUrl: function (item) {
           this.$copyText(item.url)
