@@ -90,7 +90,7 @@
                             </td>
                             <td class="text-xs-left">
 
-                                <v-btn v-if="props.item.screenshot" color="grey" disabled flat icon>
+                                <v-btn v-if="!props.item.screenshot" color="grey" disabled flat icon>
                                     <v-icon
                                             middle
                                     >
