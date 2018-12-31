@@ -90,16 +90,8 @@
                             </td>
                             <td class="text-xs-left">
 
-                                <v-btn v-if="!props.item.screenshot" color="grey" disabled flat icon>
-                                    <v-icon
-                                            middle
-                                    >
-                                        not_interested
-                                    </v-icon>
-                                </v-btn>
-
-                                <v-dialog>
-                                    <v-btn v-if="props.item.screenshot" color="primary" flat icon slot="activator">
+                                <v-dialog :disabled="!props.item.screenshot">
+                                    <v-btn v-bind:color="!!props.item.screenshot ? 'primary' : 'grey'" flat icon slot="activator">
                                         <v-icon
                                                 middle
                                         >
@@ -128,21 +120,37 @@
                                         content_copy
                                     </v-icon>
                                 </v-btn>
-                                <v-btn flat icon slot="activator">
+                                <v-btn flat icon
+                                       :disabled="props.item.action == 'screenshot'"
+                                       slot="activator">
                                     <v-icon
+                                            v-if="props.item.action != 'screenshot'"
                                             small
                                             @click="setAction(props.item, 'screenshot')"
                                     >
                                         camera_alt
                                     </v-icon>
+                                    <v-progress-circular
+                                            size="20"
+                                            width="2"
+                                            v-if="props.item.action == 'screenshot'"
+                                            indeterminate color="grey lighten-2"></v-progress-circular>
                                 </v-btn>
-                                <v-btn flat icon slot="activator">
+                                <v-btn flat icon
+                                       :disabled="props.item.action == 'restart'"
+                                       slot="activator">
                                     <v-icon
+                                            v-if="props.item.action != 'restart'"
                                             small
                                             @click="setAction(props.item, 'restart')"
                                     >
                                         loop
                                     </v-icon>
+                                    <v-progress-circular
+                                            size="20"
+                                            width="2"
+                                            v-if="props.item.action == 'restart'"
+                                            indeterminate color="grey lighten-2"></v-progress-circular>
                                 </v-btn>
                             </td>
                         </tr>
